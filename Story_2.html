@@ -1,0 +1,665 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#713b27">
+<title>YOSRA — The Pumpkin Woman</title>
+<style>
+:root{
+  --brown:#603522;--deep:#422318;--orange:#a65f37;
+  --gold:#edc777;--cream:#fff8e9;--paper:#f7e7c7;
+  --green:#627b45;--ink:#422c20;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{min-height:100%;scroll-behavior:smooth}
+body{
+  margin:0;min-height:100vh;color:var(--ink);
+  font-family:Georgia,"Times New Roman",serif;
+  background:radial-gradient(circle at top,#fff9ec,#efd1a1 70%,#b8784b);
+}
+button{font:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid #c28a36;outline-offset:3px}
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:12px 18px;background:linear-gradient(100deg,#48271d,#895036,#48271d);
+  color:#fffaf0;box-shadow:0 4px 14px #49230f35;
+}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand-icon{font-size:32px}
+.brand-main{font:bold 19px Arial,sans-serif;letter-spacing:2px}
+.brand-sub{font:12px Arial,sans-serif;opacity:.9;margin-top:4px}
+.controls{display:flex;gap:7px}
+.top-btn{
+  border:1px solid #ffffff50;border-radius:22px;
+  padding:9px 11px;background:#ffffff18;color:white;font-size:13px;
+}
+.xp-pill{
+  position:fixed;right:12px;top:77px;z-index:10;
+  background:#fff1c9;border:1px solid #d5ad62;color:#70421f;
+  padding:8px 12px;border-radius:22px;font:bold 13px Arial,sans-serif;
+  box-shadow:0 3px 10px #45210e22;
+}
+main{padding:20px 12px 8px}
+.book-stage{max-width:1050px;margin:0 auto;perspective:1200px}
+.page{
+  position:relative;overflow:hidden;
+  min-height:590px;padding:42px 46px 55px;
+  border:1px solid #895b383d;border-radius:16px;
+  background:
+    radial-gradient(circle at 10% 8%,#fff9,transparent 35%),
+    linear-gradient(140deg,#fffaf0,#f6e4bd 70%,#eed4a5);
+  box-shadow:inset 0 0 0 6px #ffffff40,0 12px 30px #59301620;
+  animation:appear .25s ease;
+}
+.page:before{
+  content:"";position:absolute;inset:13px;border:1px solid #93673b35;
+  border-radius:10px;pointer-events:none;
+}
+@keyframes appear{
+  from{opacity:.65;transform:translateY(3px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.page>*{position:relative}
+.cover,.ending{
+  min-height:485px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+}
+.kicker{
+  color:#98613a;font:12px Arial,sans-serif;
+  letter-spacing:2px;text-transform:uppercase;margin-bottom:9px;
+}
+h1,h2{color:var(--brown);line-height:1.2}
+h1{font-size:clamp(30px,5vw,43px);margin:9px 0 14px}
+h2{font-size:29px;margin:5px 0 14px}
+.subtitle{
+  max-width:490px;color:#80563b;font-size:17px;line-height:1.75;
+}
+.pumpkin-cover{
+  font-size:clamp(85px,15vw,130px);
+  filter:drop-shadow(0 10px 8px #4b240d35);
+  animation:float 3s ease-in-out infinite;
+}
+@keyframes float{50%{transform:translateY(-8px) rotate(2deg)}}
+.primary,.audio-btn,.nav-btn{
+  border:0;background:linear-gradient(135deg,#713b27,#a9683f);
+  color:white;box-shadow:0 4px 10px #4a220f28;
+}
+.primary{
+  margin-top:20px;padding:13px 23px;border-radius:30px;font-weight:bold;
+}
+.audio-btn{
+  margin:8px 0 12px;padding:10px 15px;border-radius:25px;font-size:14px;
+}
+.story-text{font-size:18px;line-height:1.85;margin:10px 0}
+.highlight{background:#f4ce79;padding:1px 4px;border-radius:4px}
+.persian{
+  direction:rtl;text-align:right;font:14px/1.9 Tahoma,Arial,sans-serif;
+  color:#70452d;padding:11px 13px;margin:13px 0;
+  border-right:3px solid #bf8953;border-radius:7px;background:#fff5dfc9;
+}
+.scene-card{
+  position:relative;isolation:isolate;overflow:hidden;
+  min-height:230px;margin:16px 0;border-radius:15px;
+  border:1px solid #7c50344d;
+  background:linear-gradient(#d9edfa 0%,#fff0cf 59%,#b7c184 60%,#87945d 100%);
+}
+.cloud{position:absolute;font-size:36px;opacity:.65;top:24px}
+.cloud.c1{left:8%}.cloud.c2{left:37%;top:58px;font-size:27px}
+.house{
+  position:absolute;right:7%;bottom:43px;width:145px;height:95px;
+  background:#d6a16d;border:3px solid #76492d;border-radius:4px;
+}
+.roof{
+  position:absolute;left:-16px;top:-49px;width:170px;height:55px;
+  background:#81442b;clip-path:polygon(50% 0,100% 100%,0 100%);
+}
+.door{
+  position:absolute;left:19px;bottom:0;width:32px;height:49px;
+  background:#75462b;border:2px solid #55321f;border-bottom:0;
+}
+.window{
+  position:absolute;right:18px;top:18px;width:39px;height:32px;
+  background:#f8d78d;border:3px solid #75462b;
+}
+.window:before,.window:after{content:"";position:absolute;background:#75462b}
+.window:before{width:2px;height:100%;left:50%}
+.window:after{height:2px;width:100%;top:50%}
+.character{
+  position:absolute;bottom:32px;font-size:83px;line-height:1;
+  filter:drop-shadow(0 5px 4px #39200d30);
+}
+.woman{left:24%}.daughter{left:43%}.wolf{left:14%}
+.leopard{left:17%}.lion{left:14%}.pumpkin{left:39%;font-size:95px}
+.scene-caption{
+  position:absolute;bottom:7px;left:50%;transform:translateX(-50%);
+  background:#fff9e8e8;border-radius:20px;padding:5px 10px;
+  white-space:nowrap;font:12px Arial,sans-serif;
+}
+.vocab{display:flex;flex-wrap:wrap;gap:7px;margin:13px 0}
+.vocab span{
+  background:#f1dcb4;border:1px solid #d5b37c;border-radius:7px;
+  padding:7px 9px;font:13px Arial,sans-serif;
+}
+.question-box{
+  padding:15px;margin:17px 0 8px;border-radius:13px;
+  border:1px solid #d0a56d;background:#fff5dfb8;
+}
+.question{font:bold 17px/1.6 Arial,sans-serif;margin-bottom:12px}
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.answer{
+  min-height:43px;padding:10px;border:1px solid #c9a06d;
+  border-radius:9px;background:#fffaf0;color:#553321;text-align:left;
+  font:14px/1.5 Arial,sans-serif;
+}
+.answer.correct{background:#e1edcf;border-color:#769750}
+.answer.wrong{background:#f6d9cb;border-color:#b76c4b}
+.answer:disabled{cursor:default;opacity:.9}
+.feedback{font:bold 14px/1.6 Arial,sans-serif;margin-top:10px;min-height:22px}
+.page-number{
+  position:absolute;bottom:17px;left:50%;transform:translateX(-50%);
+  font:12px Arial,sans-serif;color:#815b40;
+}
+.navigation{
+  max-width:1050px;margin:15px auto 22px;
+  display:flex;justify-content:center;align-items:center;gap:17px;
+}
+.nav-btn{width:48px;height:44px;border-radius:11px;font-size:24px}
+.nav-btn:disabled{opacity:.35;cursor:not-allowed}
+.counter{min-width:90px;text-align:center;font:bold 14px Arial,sans-serif;color:#71452e}
+.final-xp{
+  margin:10px 0;padding:10px 17px;border-radius:25px;
+  background:#f5d991;border:1px solid #d1a85b;font-weight:bold;
+}
+footer{text-align:center;padding:0 12px 22px;color:#70452d;font:12px Arial,sans-serif}
+#effects{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:20}
+.fall{
+  position:absolute;top:-40px;animation:fall linear forwards;
+}
+@keyframes fall{
+  to{transform:translate3d(var(--drift),110vh,0) rotate(var(--spin));opacity:.8}
+}
+.xp-pop{
+  position:fixed;right:35px;top:120px;z-index:30;
+  color:#784019;font:bold 22px Arial,sans-serif;
+  animation:pop 1s forwards;pointer-events:none;
+}
+@keyframes pop{
+  20%{opacity:1}to{opacity:0;transform:translateY(-45px) scale(1.1)}
+}
+@media(max-width:600px){
+  .topbar{padding:10px}.brand-icon{font-size:25px}
+  .brand-main{font-size:16px}.brand-sub{font-size:10px}
+  .top-btn{font-size:12px;padding:8px}
+  .xp-pill{top:68px;right:8px;padding:7px 10px}
+  main{padding:13px 9px 5px}
+  .page{min-height:0;padding:32px 21px 49px}
+  .cover,.ending{min-height:520px}
+  h2{font-size:25px}.story-text{font-size:16px;line-height:1.85}
+  .subtitle{font-size:15px}
+  .scene-card{min-height:220px}
+  .character{font-size:68px;bottom:34px}
+  .pumpkin{font-size:78px}
+  .house{transform:scale(.78);transform-origin:bottom right;right:3%}
+  .answers{grid-template-columns:1fr}
+  .answer{text-align:left}
+  .navigation{margin:13px auto 20px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-icon">🎃</div>
+    <div>
+      <div class="brand-main">YOSRA</div>
+      <div class="brand-sub">The Pumpkin Woman</div>
+    </div>
+  </div>
+  <div class="controls">
+    <button class="top-btn" id="musicBtn" type="button">🎵 Music</button>
+    <button class="top-btn" id="readBtn" type="button">🔊 Read</button>
+  </div>
+</header>
+
+<div class="xp-pill">⭐ XP: <span id="xpValue">0</span></div>
+<div id="effects" aria-hidden="true"></div>
+
+<main>
+  <div class="book-stage" id="bookStage" aria-live="polite"></div>
+  <nav class="navigation" aria-label="Story navigation">
+    <button class="nav-btn" id="prevBtn" type="button" aria-label="Previous page">‹</button>
+    <div class="counter"><span id="pageNow">1</span> / <span id="pageTotal">8</span></div>
+    <button class="nav-btn" id="nextBtn" type="button" aria-label="Next page">›</button>
+  </nav>
+</main>
+<footer>YOSRA — Interactive Language Learning</footer>
+
+<script>
+"use strict";
+
+const pages = [
+{
+ type:"cover",
+ kicker:"A Traditional Iranian Folk Tale",
+ title:"The Pumpkin Woman",
+ subtitle:"An autumn adventure full of animal encounters, courage, and clever thinking.",
+ button:"🌿 Start the Story"
+},
+{
+ kicker:"Page 1",
+ title:"The Old Woman",
+ paragraphs:[
+  "Once upon a time, an old woman lived with her daughter in a little house in the countryside.",
+  "One autumn morning, she decided to visit her daughter, who lived a little farther along the road."
+ ],
+ fa:"روزی روزگاری، پیرزنی با دخترش در خانه‌ای کوچک در روستا زندگی می‌کرد. یک صبح پاییزی تصمیم گرفت به دیدن دخترش برود؛ دخترش کمی دورتر در همان جاده زندگی می‌کرد.",
+ scene:"house",
+ caption:"A little house in the countryside",
+ vocab:[["old woman","پیرزن"],["countryside","روستا"],["autumn","پاییز"],["road","جاده"]]
+},
+{
+ kicker:"Page 2",
+ title:"A Clever Idea",
+ paragraphs:[
+  "On her way, the old woman saw a big pumpkin in a field.",
+  "Suddenly, she had an idea: <span class='highlight'>“I’ll hide inside the pumpkin!”</span>",
+  "She climbed inside it. Then the pumpkin began to roll down the road."
+ ],
+ fa:"در راه، پیرزن کدوتنبلی بزرگ در مزرعه دید. ناگهان فکری به ذهنش رسید: «داخل کدو پنهان می‌شوم!» او به داخل کدو رفت و کدو شروع به غلتیدن در جاده کرد.",
+ scene:"pumpkin",
+ caption:"The pumpkin rolls down the road",
+ vocab:[["pumpkin","کدو تنبل"],["field","مزرعه"],["hide","پنهان شدن"],["roll","غلتیدن"]]
+},
+{
+ kicker:"Page 3",
+ title:"The Wolf",
+ paragraphs:[
+  "Suddenly, a wolf appeared on the road. He looked at the pumpkin curiously.",
+  "“Pumpkin, where are you going?” he asked.",
+  "“I’m going to visit my daughter,” the old woman replied calmly from inside."
+ ],
+ fa:"ناگهان گرگی در جاده ظاهر شد و با کنجکاوی به کدو نگاه کرد. پرسید: «کدو، کجا می‌روی؟» پیرزن از داخل کدو با آرامش پاسخ داد: «دارم به دیدن دخترم می‌روم.»",
+ scene:"wolf",
+ caption:"The wolf meets the pumpkin",
+ vocab:[["wolf","گرگ"],["curiously","با کنجکاوی"],["reply","پاسخ دادن"],["calmly","با آرامش"]],
+ question:{
+  text:"🧠 Why is the old woman travelling?",
+  choices:["To visit her daughter","To buy a new pumpkin","To find a wolf","To go to school"],
+  correct:0
+ }
+},
+{
+ kicker:"Page 4",
+ title:"The Leopard",
+ paragraphs:[
+  "The wolf went away. A little farther along the road, a leopard appeared.",
+  "“Pumpkin, where are you going in such a hurry?” the leopard asked.",
+  "The pumpkin kept rolling, and the old woman stayed calm inside."
+ ],
+ fa:"گرگ دور شد. کمی جلوتر در جاده، پلنگی ظاهر شد. پلنگ پرسید: «کدو، با این عجله کجا می‌روی؟» کدو به غلتیدن ادامه داد و پیرزن داخل آن آرام ماند.",
+ scene:"leopard",
+ caption:"The leopard watches the pumpkin",
+ vocab:[["leopard","پلنگ"],["in a hurry","با عجله"],["keep doing","به کاری ادامه دادن"],["stay calm","آرام ماندن"]],
+ question:{
+  text:"🧠 Which animal appears after the wolf?",
+  choices:["A horse","A leopard","A fox","A bird"],
+  correct:1
+ }
+},
+{
+ kicker:"Page 5",
+ title:"The Lion",
+ paragraphs:[
+  "At last, a magnificent lion appeared on the road.",
+  "“Stop! I want to know who is inside!” he roared.",
+  "But the pumpkin kept rolling faster and faster."
+ ],
+ fa:"سرانجام شیری باشکوه در جاده ظاهر شد. غرش کرد: «بایست! می‌خواهم بدانم چه کسی داخل آن است!» اما کدو همچنان سریع‌تر و سریع‌تر می‌غلتید.",
+ scene:"lion",
+ caption:"The lion tries to stop the pumpkin",
+ vocab:[["lion","شیر"],["magnificent","باشکوه"],["roar","غرش کردن"],["faster and faster","سریع‌تر و سریع‌تر"]],
+ question:{
+  text:"🧠 What happens when the lion says “Stop!”?",
+  choices:["The pumpkin stops","The pumpkin rolls faster","The woman gets out","The lion goes home"],
+  correct:1
+ }
+},
+{
+ kicker:"Page 6",
+ title:"At Her Daughter’s House",
+ paragraphs:[
+  "After escaping from the animals, the old woman finally reached her daughter’s house.",
+  "She climbed out of the pumpkin, and her daughter greeted her with a warm smile.",
+  "They went inside together and prepared a delicious meal."
+ ],
+ fa:"پس از فرار از حیوانات، پیرزن سرانجام به خانه دخترش رسید. از کدو بیرون آمد و دخترش با لبخندی گرم از او استقبال کرد. آن‌ها با هم به خانه رفتند و غذای خوشمزه‌ای آماده کردند.",
+ scene:"reunion",
+ caption:"A happy reunion",
+ vocab:[["escape","فرار کردن"],["reach","رسیدن"],["greet","استقبال کردن"],["delicious","خوشمزه"]],
+ question:{
+  text:"🧠 What do the woman and her daughter do?",
+  choices:["They run into the forest","They prepare a meal","They meet the wolf","They plant a pumpkin"],
+  correct:1
+ }
+},
+{
+ type:"ending",
+ kicker:"The End",
+ title:"Well Done!",
+ paragraphs:[
+  "Thanks to her clever idea, the old woman made it safely to her daughter’s house.",
+  "This story reminds us that courage and clever thinking can help us face difficult situations."
+ ],
+ fa:"به لطف فکر زیرکانه‌اش، پیرزن سالم به خانه دخترش رسید. این داستان به ما یادآوری می‌کند که شجاعت و فکر کردن هوشمندانه می‌توانند به ما کمک کنند با موقعیت‌های دشوار روبه‌رو شویم.",
+ button:"🔄 Start Again"
+}
+];
+
+let currentPage=0;
+let xp=0;
+let musicOn=false;
+let audioContext=null;
+let musicTimer=null;
+let musicIndex=0;
+const answered=new Set();
+
+const $=id=>document.getElementById(id);
+const book=$("bookStage");
+
+function sceneHTML(type,caption){
+ let people="";
+ if(type==="house"){
+  people='<div class="character woman">👵</div><div class="character daughter">👧</div>';
+ }else if(type==="pumpkin"){
+  people='<div class="character pumpkin">🎃</div>';
+ }else if(type==="wolf"){
+  people='<div class="character wolf">🐺</div><div class="character pumpkin">🎃</div>';
+ }else if(type==="leopard"){
+  people='<div class="character leopard">🐆</div><div class="character pumpkin">🎃</div>';
+ }else if(type==="lion"){
+  people='<div class="character lion">🦁</div><div class="character pumpkin">🎃</div>';
+ }else if(type==="reunion"){
+  people='<div class="character woman">👵</div><div class="character daughter">👧</div>';
+ }
+ const house=(type==="house"||type==="reunion")
+  ?'<div class="house"><div class="roof"></div><div class="door"></div><div class="window"></div></div>'
+  :'';
+ return '<div class="scene-card" role="img" aria-label="'+caption+'">'+
+ '<div class="cloud c1">☁️</div><div class="cloud c2">☁️</div>'+
+ house+people+'<div class="scene-caption">'+caption+'</div></div>';
+}
+
+function vocabHTML(items){
+ return '<div class="vocab">'+items.map(v=>
+  '<span><b>'+v[0]+'</b> = '+v[1]+'</span>'
+ ).join("")+'</div>';
+}
+
+function questionHTML(q,index){
+ if(!q)return "";
+ return '<div class="question-box" data-question="'+index+'">'+
+ '<div class="question">'+q.text+'</div><div class="answers">'+
+ q.choices.map((choice,i)=>
+ '<button type="button" class="answer" data-choice="'+i+'" aria-label="'+choice+'">'+choice+'</button>'
+ ).join("")+'</div><div class="feedback" aria-live="polite"></div></div>';
+}
+
+function render(){
+ const p=pages[currentPage];
+ let html="";
+ if(p.type==="cover"){
+  html='<section class="page"><div class="cover">'+
+   '<div class="kicker">'+p.kicker+'</div>'+
+   '<div class="pumpkin-cover" aria-hidden="true">🎃</div>'+
+   '<h1>'+p.title+'</h1><p class="subtitle">'+p.subtitle+'</p>'+
+   '<button class="primary" id="startBtn" type="button">'+p.button+'</button>'+
+   '</div><div class="page-number">1</div></section>';
+ }else if(p.type==="ending"){
+  html='<section class="page"><div class="ending">'+
+   '<div class="pumpkin-cover" aria-hidden="true">🎃🍂🌿</div>'+
+   '<div class="kicker">'+p.kicker+'</div><h1>'+p.title+'</h1>'+
+   p.paragraphs.map(t=>'<p class="story-text">'+t+'</p>').join("")+
+   '<div class="persian">'+p.fa+'</div>'+
+   '<button class="audio-btn" data-read="'+currentPage+'" type="button">🔊 Listen to the Ending</button>'+
+   '<div class="final-xp">⭐ Final XP: <span id="finalXP">'+xp+'</span></div>'+
+   '<button class="primary" id="restartBtn" type="button">'+p.button+'</button>'+
+   '</div><div class="page-number">'+(currentPage+1)+'</div></section>';
+ }else{
+  html='<section class="page"><div class="kicker">'+p.kicker+'</div>'+
+   '<h2>'+p.title+'</h2>'+
+   p.paragraphs.map(t=>'<p class="story-text">'+t+'</p>').join("")+
+   '<button class="audio-btn" data-read="'+currentPage+'" type="button">🔊 Listen to the Story</button>'+
+   '<div class="persian">'+p.fa+'</div>'+
+   sceneHTML(p.scene,p.caption)+vocabHTML(p.vocab)+
+   questionHTML(p.question,currentPage)+
+   '<div class="page-number">'+(currentPage+1)+'</div></section>';
+ }
+ book.innerHTML=html;
+ $("pageNow").textContent=currentPage+1;
+ $("pageTotal").textContent=pages.length;
+ $("xpValue").textContent=xp;
+ $("prevBtn").disabled=currentPage===0;
+ $("nextBtn").disabled=currentPage===pages.length-1;
+
+ const start=$("startBtn");
+ if(start)start.addEventListener("click",startStory);
+ const restart=$("restartBtn");
+ if(restart)restart.addEventListener("click",restartStory);
+ book.querySelectorAll("[data-read]").forEach(btn=>{
+  btn.addEventListener("click",()=>speakPage(Number(btn.dataset.read)));
+ });
+ const q=book.querySelector(".question-box");
+ if(q)setupQuestion(q,p.question,currentPage);
+}
+
+function setupQuestion(box,q,index){
+ const feedback=box.querySelector(".feedback");
+ const buttons=box.querySelectorAll(".answer");
+ buttons.forEach(btn=>{
+  btn.addEventListener("click",()=>{
+   if(answered.has(index))return;
+   const selected=Number(btn.dataset.choice);
+   if(selected===q.correct){
+    answered.add(index);
+    xp+=10;
+    $("xpValue").textContent=xp;
+    const final=$("finalXP");
+    if(final)final.textContent=xp;
+    btn.classList.add("correct");
+    feedback.textContent="✨ Excellent! Correct answer. +10 XP";
+    feedback.style.color="#527b38";
+    buttons.forEach(b=>b.disabled=true);
+    playCorrect();
+    createFalling("🍂",14);
+    createFalling("🎃",5);
+    showXPPop();
+   }else{
+    btn.classList.add("wrong");
+    feedback.textContent="🌿 Not quite. Try again!";
+    feedback.style.color="#9b4d34";
+    playWrong();
+    btn.disabled=true;
+    setTimeout(()=>btn.classList.remove("wrong"),650);
+   }
+  });
+ });
+}
+
+function startStory(){
+ currentPage=1;
+ render();
+ createFalling("🍂",12);
+ speakPage(1);
+}
+function nextPage(){
+ if(currentPage>=pages.length-1)return;
+ stopReading();
+ currentPage++;
+ render();
+}
+function previousPage(){
+ if(currentPage<=0)return;
+ stopReading();
+ currentPage--;
+ render();
+}
+function restartStory(){
+ stopReading();
+ stopMusic();
+ currentPage=0;
+ xp=0;
+ answered.clear();
+ render();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+$("nextBtn").addEventListener("click",nextPage);
+$("prevBtn").addEventListener("click",previousPage);
+$("readBtn").addEventListener("click",()=>{
+ if(currentPage===0){
+  speak("Welcome to YOSRA. The Pumpkin Woman. Press Start the Story to begin.");
+ }else speakPage(currentPage);
+});
+
+function speakPage(index){
+ const p=pages[index];
+ if(!p)return;
+ const text=[p.title,...(p.paragraphs||[]).map(t=>t.replace(/<[^>]*>/g,"")),p.caption||""].join(". ");
+ speak(text);
+}
+function stopReading(){
+ if("speechSynthesis" in window)window.speechSynthesis.cancel();
+}
+function speak(text){
+ if(!("speechSynthesis" in window)){
+  alert("Speech reading is not supported by this browser.");
+  return;
+ }
+ window.speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(text);
+ u.lang="en-US";
+ u.rate=.88;
+ u.pitch=1;
+ u.volume=1;
+ const voices=window.speechSynthesis.getVoices();
+ const voice=voices.find(v=>/^en-US$/i.test(v.lang))
+  ||voices.find(v=>/^en/i.test(v.lang));
+ if(voice)u.voice=voice;
+ window.speechSynthesis.speak(u);
+}
+if("speechSynthesis" in window){
+ window.speechSynthesis.onvoiceschanged=()=>window.speechSynthesis.getVoices();
+}
+
+function getAudio(){
+ const AudioCtx=window.AudioContext||window.webkitAudioContext;
+ if(!AudioCtx)throw new Error("Audio unavailable");
+ if(!audioContext)audioContext=new AudioCtx();
+ if(audioContext.state==="suspended")audioContext.resume();
+ return audioContext;
+}
+function tone(freq,duration,volume,type="sine",delay=0){
+ const ctx=getAudio();
+ const osc=ctx.createOscillator();
+ const gain=ctx.createGain();
+ const t=ctx.currentTime+delay;
+ osc.type=type;
+ osc.frequency.setValueAtTime(freq,t);
+ gain.gain.setValueAtTime(.0001,t);
+ gain.gain.exponentialRampToValueAtTime(volume,t+.02);
+ gain.gain.exponentialRampToValueAtTime(.0001,t+duration);
+ osc.connect(gain);
+ gain.connect(ctx.destination);
+ osc.start(t);
+ osc.stop(t+duration+.03);
+}
+function safeTone(freq,duration,volume,type="sine",delay=0){
+ try{tone(freq,duration,volume,type,delay)}catch(e){}
+}
+function playCorrect(){
+ [523.25,659.25,783.99].forEach((f,i)=>safeTone(f,.25,.09,"sine",i*.09));
+}
+function playWrong(){safeTone(180,.22,.06,"triangle")}
+function playTurn(){safeTone(440,.12,.045,"sine")}
+
+const melody=[261.63,329.63,392,329.63,293.66,349.23,440,349.23];
+function musicNote(){
+ if(!musicOn)return;
+ safeTone(melody[musicIndex],.5,.018,"sine");
+ musicIndex=(musicIndex+1)%melody.length;
+}
+function startMusic(){
+ if(musicOn)return;
+ musicOn=true;
+ $("musicBtn").textContent="🔇 Music Off";
+ musicNote();
+ musicTimer=setInterval(musicNote,650);
+}
+function stopMusic(){
+ musicOn=false;
+ $("musicBtn").textContent="🎵 Music";
+ if(musicTimer){clearInterval(musicTimer);musicTimer=null;}
+}
+$("musicBtn").addEventListener("click",()=>{
+ if(musicOn)stopMusic();else startMusic();
+});
+
+function createFalling(symbol,count){
+ const layer=$("effects");
+ for(let i=0;i<count;i++){
+  const el=document.createElement("span");
+  el.className="fall";
+  el.textContent=symbol;
+  el.style.left=Math.random()*100+"%";
+  el.style.fontSize=(20+Math.random()*16)+"px";
+  el.style.setProperty("--drift",(Math.random()*180-90)+"px");
+  el.style.setProperty("--spin",(Math.random()*700-350)+"deg");
+  el.style.animationDuration=(3+Math.random()*2)+"s";
+  el.style.animationDelay=(Math.random()*.5)+"s";
+  layer.appendChild(el);
+  setTimeout(()=>el.remove(),6000);
+ }
+}
+function showXPPop(){
+ const pop=document.createElement("div");
+ pop.className="xp-pop";
+ pop.textContent="+10 XP";
+ document.body.appendChild(pop);
+ setTimeout(()=>pop.remove(),1000);
+}
+
+let touchX=0,touchY=0;
+book.addEventListener("touchstart",e=>{
+ if(e.touches.length===1){
+  touchX=e.touches[0].clientX;
+  touchY=e.touches[0].clientY;
+ }
+},{passive:true});
+book.addEventListener("touchend",e=>{
+ if(!touchX)return;
+ const dx=e.changedTouches[0].clientX-touchX;
+ const dy=e.changedTouches[0].clientY-touchY;
+ if(Math.abs(dx)>65&&Math.abs(dx)>Math.abs(dy)*1.3){
+  if(dx<0)nextPage();else previousPage();
+ }
+ touchX=0;touchY=0;
+},{passive:true});
+
+document.addEventListener("keydown",e=>{
+ if(e.key==="ArrowRight"||e.key==="PageDown")nextPage();
+ if(e.key==="ArrowLeft"||e.key==="PageUp")previousPage();
+});
+
+document.addEventListener("visibilitychange",()=>{
+ if(document.hidden)stopReading();
+});
+
+render();
+</script>
+</body>
+</html>
