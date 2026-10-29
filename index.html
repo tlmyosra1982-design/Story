@@ -1,665 +1,414 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#713b27">
-<title>YOSRA — The Pumpkin Woman</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#21152d">
+<title>YOSRA | The Rolling Pumpkin</title>
 <style>
 :root{
-  --brown:#603522;--deep:#422318;--orange:#a65f37;
-  --gold:#edc777;--cream:#fff8e9;--paper:#f7e7c7;
-  --green:#627b45;--ink:#422c20;
+ --bg:#171020;--panel:#281b32;--gold:#f3c879;
+ --cream:#fff4df;--muted:#c9b9ce;
 }
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{min-height:100%;scroll-behavior:smooth}
-body{
-  margin:0;min-height:100vh;color:var(--ink);
-  font-family:Georgia,"Times New Roman",serif;
-  background:radial-gradient(circle at top,#fff9ec,#efd1a1 70%,#b8784b);
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--cream);font-family:Tahoma,Arial,sans-serif}
+header{text-align:center;padding:22px 12px 16px;background:linear-gradient(140deg,#21152d,#49304e);border-bottom:1px solid #806047}
+.brand{color:var(--gold);letter-spacing:4px;font-size:13px}
+h1{font-size:25px;margin:12px 0 5px}
+.subtitle{font-size:13px;color:var(--muted)}
+main{max-width:760px;margin:auto;padding:15px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+button{border:1px solid #82638e;border-radius:13px;padding:11px 15px;background:#382744;color:white;font-size:14px;cursor:pointer}
+button:active{transform:scale(.97)}
+button.primary{background:#8a5b9d;border-color:#c49bda}
+button.gold{background:#8d6334;border-color:var(--gold)}
+.scene{
+ background:linear-gradient(#25394a 0%,#59624c 57%,#806044 100%);
+ border:1px solid #947451;border-radius:20px;min-height:260px;
+ position:relative;overflow:hidden;display:flex;align-items:center;
+ justify-content:center;padding:8px;
+ box-shadow:inset 0 0 35px #17102066,0 12px 30px #0005;
 }
-button{font:inherit;cursor:pointer}
-button:focus-visible{outline:3px solid #c28a36;outline-offset:3px}
-.topbar{
-  display:flex;align-items:center;justify-content:space-between;gap:10px;
-  padding:12px 18px;background:linear-gradient(100deg,#48271d,#895036,#48271d);
-  color:#fffaf0;box-shadow:0 4px 14px #49230f35;
-}
-.brand{display:flex;align-items:center;gap:10px;min-width:0}
-.brand-icon{font-size:32px}
-.brand-main{font:bold 19px Arial,sans-serif;letter-spacing:2px}
-.brand-sub{font:12px Arial,sans-serif;opacity:.9;margin-top:4px}
-.controls{display:flex;gap:7px}
-.top-btn{
-  border:1px solid #ffffff50;border-radius:22px;
-  padding:9px 11px;background:#ffffff18;color:white;font-size:13px;
-}
-.xp-pill{
-  position:fixed;right:12px;top:77px;z-index:10;
-  background:#fff1c9;border:1px solid #d5ad62;color:#70421f;
-  padding:8px 12px;border-radius:22px;font:bold 13px Arial,sans-serif;
-  box-shadow:0 3px 10px #45210e22;
-}
-main{padding:20px 12px 8px}
-.book-stage{max-width:1050px;margin:0 auto;perspective:1200px}
-.page{
-  position:relative;overflow:hidden;
-  min-height:590px;padding:42px 46px 55px;
-  border:1px solid #895b383d;border-radius:16px;
-  background:
-    radial-gradient(circle at 10% 8%,#fff9,transparent 35%),
-    linear-gradient(140deg,#fffaf0,#f6e4bd 70%,#eed4a5);
-  box-shadow:inset 0 0 0 6px #ffffff40,0 12px 30px #59301620;
-  animation:appear .25s ease;
-}
-.page:before{
-  content:"";position:absolute;inset:13px;border:1px solid #93673b35;
-  border-radius:10px;pointer-events:none;
-}
-@keyframes appear{
-  from{opacity:.65;transform:translateY(3px)}
-  to{opacity:1;transform:translateY(0)}
-}
-.page>*{position:relative}
-.cover,.ending{
-  min-height:485px;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;text-align:center;
-}
-.kicker{
-  color:#98613a;font:12px Arial,sans-serif;
-  letter-spacing:2px;text-transform:uppercase;margin-bottom:9px;
-}
-h1,h2{color:var(--brown);line-height:1.2}
-h1{font-size:clamp(30px,5vw,43px);margin:9px 0 14px}
-h2{font-size:29px;margin:5px 0 14px}
-.subtitle{
-  max-width:490px;color:#80563b;font-size:17px;line-height:1.75;
-}
-.pumpkin-cover{
-  font-size:clamp(85px,15vw,130px);
-  filter:drop-shadow(0 10px 8px #4b240d35);
-  animation:float 3s ease-in-out infinite;
-}
-@keyframes float{50%{transform:translateY(-8px) rotate(2deg)}}
-.primary,.audio-btn,.nav-btn{
-  border:0;background:linear-gradient(135deg,#713b27,#a9683f);
-  color:white;box-shadow:0 4px 10px #4a220f28;
-}
-.primary{
-  margin-top:20px;padding:13px 23px;border-radius:30px;font-weight:bold;
-}
-.audio-btn{
-  margin:8px 0 12px;padding:10px 15px;border-radius:25px;font-size:14px;
-}
-.story-text{font-size:18px;line-height:1.85;margin:10px 0}
-.highlight{background:#f4ce79;padding:1px 4px;border-radius:4px}
-.persian{
-  direction:rtl;text-align:right;font:14px/1.9 Tahoma,Arial,sans-serif;
-  color:#70452d;padding:11px 13px;margin:13px 0;
-  border-right:3px solid #bf8953;border-radius:7px;background:#fff5dfc9;
-}
-.scene-card{
-  position:relative;isolation:isolate;overflow:hidden;
-  min-height:230px;margin:16px 0;border-radius:15px;
-  border:1px solid #7c50344d;
-  background:linear-gradient(#d9edfa 0%,#fff0cf 59%,#b7c184 60%,#87945d 100%);
-}
-.cloud{position:absolute;font-size:36px;opacity:.65;top:24px}
-.cloud.c1{left:8%}.cloud.c2{left:37%;top:58px;font-size:27px}
-.house{
-  position:absolute;right:7%;bottom:43px;width:145px;height:95px;
-  background:#d6a16d;border:3px solid #76492d;border-radius:4px;
-}
-.roof{
-  position:absolute;left:-16px;top:-49px;width:170px;height:55px;
-  background:#81442b;clip-path:polygon(50% 0,100% 100%,0 100%);
-}
-.door{
-  position:absolute;left:19px;bottom:0;width:32px;height:49px;
-  background:#75462b;border:2px solid #55321f;border-bottom:0;
-}
-.window{
-  position:absolute;right:18px;top:18px;width:39px;height:32px;
-  background:#f8d78d;border:3px solid #75462b;
-}
-.window:before,.window:after{content:"";position:absolute;background:#75462b}
-.window:before{width:2px;height:100%;left:50%}
-.window:after{height:2px;width:100%;top:50%}
-.character{
-  position:absolute;bottom:32px;font-size:83px;line-height:1;
-  filter:drop-shadow(0 5px 4px #39200d30);
-}
-.woman{left:24%}.daughter{left:43%}.wolf{left:14%}
-.leopard{left:17%}.lion{left:14%}.pumpkin{left:39%;font-size:95px}
-.scene-caption{
-  position:absolute;bottom:7px;left:50%;transform:translateX(-50%);
-  background:#fff9e8e8;border-radius:20px;padding:5px 10px;
-  white-space:nowrap;font:12px Arial,sans-serif;
-}
-.vocab{display:flex;flex-wrap:wrap;gap:7px;margin:13px 0}
-.vocab span{
-  background:#f1dcb4;border:1px solid #d5b37c;border-radius:7px;
-  padding:7px 9px;font:13px Arial,sans-serif;
-}
-.question-box{
-  padding:15px;margin:17px 0 8px;border-radius:13px;
-  border:1px solid #d0a56d;background:#fff5dfb8;
-}
-.question{font:bold 17px/1.6 Arial,sans-serif;margin-bottom:12px}
-.answers{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.answer{
-  min-height:43px;padding:10px;border:1px solid #c9a06d;
-  border-radius:9px;background:#fffaf0;color:#553321;text-align:left;
-  font:14px/1.5 Arial,sans-serif;
-}
-.answer.correct{background:#e1edcf;border-color:#769750}
-.answer.wrong{background:#f6d9cb;border-color:#b76c4b}
-.answer:disabled{cursor:default;opacity:.9}
-.feedback{font:bold 14px/1.6 Arial,sans-serif;margin-top:10px;min-height:22px}
-.page-number{
-  position:absolute;bottom:17px;left:50%;transform:translateX(-50%);
-  font:12px Arial,sans-serif;color:#815b40;
-}
-.navigation{
-  max-width:1050px;margin:15px auto 22px;
-  display:flex;justify-content:center;align-items:center;gap:17px;
-}
-.nav-btn{width:48px;height:44px;border-radius:11px;font-size:24px}
-.nav-btn:disabled{opacity:.35;cursor:not-allowed}
-.counter{min-width:90px;text-align:center;font:bold 14px Arial,sans-serif;color:#71452e}
-.final-xp{
-  margin:10px 0;padding:10px 17px;border-radius:25px;
-  background:#f5d991;border:1px solid #d1a85b;font-weight:bold;
-}
-footer{text-align:center;padding:0 12px 22px;color:#70452d;font:12px Arial,sans-serif}
-#effects{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:20}
-.fall{
-  position:absolute;top:-40px;animation:fall linear forwards;
-}
-@keyframes fall{
-  to{transform:translate3d(var(--drift),110vh,0) rotate(var(--spin));opacity:.8}
-}
-.xp-pop{
-  position:fixed;right:35px;top:120px;z-index:30;
-  color:#784019;font:bold 22px Arial,sans-serif;
-  animation:pop 1s forwards;pointer-events:none;
-}
-@keyframes pop{
-  20%{opacity:1}to{opacity:0;transform:translateY(-45px) scale(1.1)}
-}
-@media(max-width:600px){
-  .topbar{padding:10px}.brand-icon{font-size:25px}
-  .brand-main{font-size:16px}.brand-sub{font-size:10px}
-  .top-btn{font-size:12px;padding:8px}
-  .xp-pill{top:68px;right:8px;padding:7px 10px}
-  main{padding:13px 9px 5px}
-  .page{min-height:0;padding:32px 21px 49px}
-  .cover,.ending{min-height:520px}
-  h2{font-size:25px}.story-text{font-size:16px;line-height:1.85}
-  .subtitle{font-size:15px}
-  .scene-card{min-height:220px}
-  .character{font-size:68px;bottom:34px}
-  .pumpkin{font-size:78px}
-  .house{transform:scale(.78);transform-origin:bottom right;right:3%}
-  .answers{grid-template-columns:1fr}
-  .answer{text-align:left}
-  .navigation{margin:13px auto 20px}
-}
-@media(prefers-reduced-motion:reduce){
-  *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
-}
+.scene svg{width:100%;max-width:600px;height:auto;position:relative;z-index:1}
+.story-card{margin-top:14px;background:var(--panel);border:1px solid #594365;border-radius:18px;padding:18px}
+.counter{color:var(--gold);font-size:12px}
+.english{direction:ltr;text-align:left;font-family:Georgia,serif;font-size:19px;line-height:1.7;margin:13px 0}
+.persian{font-size:15px;line-height:2;color:#e5d6c7}
+.translation{border-top:1px solid #594365;padding-top:12px;margin-top:12px}
+.hidden{display:none}
+.navigation{display:flex;justify-content:space-between;gap:10px;margin-top:15px}
+.navigation button{flex:1}
+h2{font-size:18px;color:var(--gold)}
+.quiz-option{display:block;width:100%;text-align:left;direction:ltr;margin:9px 0;background:#34243d;padding:13px}
+.feedback{text-align:center;min-height:28px;color:var(--gold);margin:12px}
+.score{text-align:center;color:var(--gold);margin:10px}
+footer{text-align:center;color:#a99aab;font-size:11px;padding:20px}
+.leaf{position:fixed;top:-30px;z-index:20;pointer-events:none;animation:fall 3.5s linear forwards;font-size:24px}
+@keyframes fall{to{transform:translateY(110vh) rotate(650deg);opacity:0}}
 </style>
 </head>
 <body>
-<header class="topbar">
-  <div class="brand">
-    <div class="brand-icon">🎃</div>
-    <div>
-      <div class="brand-main">YOSRA</div>
-      <div class="brand-sub">The Pumpkin Woman</div>
-    </div>
-  </div>
-  <div class="controls">
-    <button class="top-btn" id="musicBtn" type="button">🎵 Music</button>
-    <button class="top-btn" id="readBtn" type="button">🔊 Read</button>
-  </div>
+<header>
+ <div class="brand">Y O S R A</div>
+ <h1>🎃 The Rolling Pumpkin</h1>
+ <div class="subtitle">An Iranian folk tale · داستان کدو قلقلی</div>
 </header>
 
-<div class="xp-pill">⭐ XP: <span id="xpValue">0</span></div>
-<div id="effects" aria-hidden="true"></div>
-
 <main>
-  <div class="book-stage" id="bookStage" aria-live="polite"></div>
-  <nav class="navigation" aria-label="Story navigation">
-    <button class="nav-btn" id="prevBtn" type="button" aria-label="Previous page">‹</button>
-    <div class="counter"><span id="pageNow">1</span> / <span id="pageTotal">8</span></div>
-    <button class="nav-btn" id="nextBtn" type="button" aria-label="Next page">›</button>
-  </nav>
+ <div class="toolbar">
+  <button class="primary" onclick="toggleTranslation()">ترجمه فارسی</button>
+  <button onclick="speakStory()">🔊 Listen</button>
+  <button onclick="stopSpeech()">■ Stop</button>
+ </div>
+
+ <div class="scene" id="scene"></div>
+
+ <section class="story-card">
+  <div class="counter" id="counter"></div>
+  <div class="english" id="english"></div>
+  <div class="translation" id="translation">
+   <div class="persian" id="persian"></div>
+  </div>
+  <div class="navigation">
+   <button onclick="previousPage()">❮ قبلی</button>
+   <button class="gold" onclick="nextPage()">بعدی ❯</button>
+  </div>
+ </section>
+
+ <section class="story-card">
+  <h2>🍂 Story Challenge</h2>
+  <div class="persian">به پرسش‌ها پاسخ بده و امتیاز بگیر.</div>
+  <div id="questionArea"></div>
+  <div class="feedback" id="feedback"></div>
+  <div class="score" id="score">Score: 0</div>
+ </section>
 </main>
-<footer>YOSRA — Interactive Language Learning</footer>
+
+<footer>YOSRA · Interactive Language Learning</footer>
 
 <script>
-"use strict";
-
-const pages = [
+const pages=[
 {
- type:"cover",
- kicker:"A Traditional Iranian Folk Tale",
- title:"The Pumpkin Woman",
- subtitle:"An autumn adventure full of animal encounters, courage, and clever thinking.",
- button:"🌿 Start the Story"
+en:"Once upon a time, there was a little old woman. One day, she decided to visit her daughter who lived on the other side of the forest.",
+fa:"یکی بود، یکی نبود. پیرزن کوچولویی بود که یک روز تصمیم گرفت به دیدن دخترش برود. دخترش آن طرف جنگل زندگی می‌کرد.",
+cast:["woman","tree"]
 },
 {
- kicker:"Page 1",
- title:"The Old Woman",
- paragraphs:[
-  "Once upon a time, an old woman lived with her daughter in a little house in the countryside.",
-  "One autumn morning, she decided to visit her daughter, who lived a little farther along the road."
- ],
- fa:"روزی روزگاری، پیرزنی با دخترش در خانه‌ای کوچک در روستا زندگی می‌کرد. یک صبح پاییزی تصمیم گرفت به دیدن دخترش برود؛ دخترش کمی دورتر در همان جاده زندگی می‌کرد.",
- scene:"house",
- caption:"A little house in the countryside",
- vocab:[["old woman","پیرزن"],["countryside","روستا"],["autumn","پاییز"],["road","جاده"]]
+en:"On her way, she met a hungry wolf. The wolf said, “Old woman, I am going to eat you!” The old woman answered, “Please wait until I come back. I will be much fatter then!”",
+fa:"در راه با گرگ گرسنه‌ای روبه‌رو شد. گرگ گفت: «پیرزن، می‌خواهم تو را بخورم!» پیرزن گفت: «لطفاً صبر کن تا برگردم؛ آن وقت خیلی چاق‌تر شده‌ام!»",
+cast:["woman","wolf"]
 },
 {
- kicker:"Page 2",
- title:"A Clever Idea",
- paragraphs:[
-  "On her way, the old woman saw a big pumpkin in a field.",
-  "Suddenly, she had an idea: <span class='highlight'>“I’ll hide inside the pumpkin!”</span>",
-  "She climbed inside it. Then the pumpkin began to roll down the road."
- ],
- fa:"در راه، پیرزن کدوتنبلی بزرگ در مزرعه دید. ناگهان فکری به ذهنش رسید: «داخل کدو پنهان می‌شوم!» او به داخل کدو رفت و کدو شروع به غلتیدن در جاده کرد.",
- scene:"pumpkin",
- caption:"The pumpkin rolls down the road",
- vocab:[["pumpkin","کدو تنبل"],["field","مزرعه"],["hide","پنهان شدن"],["roll","غلتیدن"]]
+en:"A little farther on, she met a lion. The lion wanted to eat her too. She made the same promise: “Let me visit my daughter first. I will be fatter on my way back!”",
+fa:"کمی جلوتر، شیر را دید. شیر هم خواست او را بخورد. پیرزن همان قول را داد: «اول بگذار به دیدن دخترم بروم؛ در راه برگشت چاق‌تر خواهم بود!»",
+cast:["woman","lion"]
 },
 {
- kicker:"Page 3",
- title:"The Wolf",
- paragraphs:[
-  "Suddenly, a wolf appeared on the road. He looked at the pumpkin curiously.",
-  "“Pumpkin, where are you going?” he asked.",
-  "“I’m going to visit my daughter,” the old woman replied calmly from inside."
- ],
- fa:"ناگهان گرگی در جاده ظاهر شد و با کنجکاوی به کدو نگاه کرد. پرسید: «کدو، کجا می‌روی؟» پیرزن از داخل کدو با آرامش پاسخ داد: «دارم به دیدن دخترم می‌روم.»",
- scene:"wolf",
- caption:"The wolf meets the pumpkin",
- vocab:[["wolf","گرگ"],["curiously","با کنجکاوی"],["reply","پاسخ دادن"],["calmly","با آرامش"]],
- question:{
-  text:"🧠 Why is the old woman travelling?",
-  choices:["To visit her daughter","To buy a new pumpkin","To find a wolf","To go to school"],
-  correct:0
- }
+en:"Then she met a leopard. He also wanted to eat her. The clever old woman repeated her promise and continued her journey.",
+fa:"بعد از آن با پلنگ روبه‌رو شد. پلنگ هم می‌خواست او را بخورد. پیرزن زیرک دوباره همان قول را داد و به راهش ادامه داد.",
+cast:["woman","leopard"]
 },
 {
- kicker:"Page 4",
- title:"The Leopard",
- paragraphs:[
-  "The wolf went away. A little farther along the road, a leopard appeared.",
-  "“Pumpkin, where are you going in such a hurry?” the leopard asked.",
-  "The pumpkin kept rolling, and the old woman stayed calm inside."
- ],
- fa:"گرگ دور شد. کمی جلوتر در جاده، پلنگی ظاهر شد. پلنگ پرسید: «کدو، با این عجله کجا می‌روی؟» کدو به غلتیدن ادامه داد و پیرزن داخل آن آرام ماند.",
- scene:"leopard",
- caption:"The leopard watches the pumpkin",
- vocab:[["leopard","پلنگ"],["in a hurry","با عجله"],["keep doing","به کاری ادامه دادن"],["stay calm","آرام ماندن"]],
- question:{
-  text:"🧠 Which animal appears after the wolf?",
-  choices:["A horse","A leopard","A fox","A bird"],
-  correct:1
- }
+en:"At last, she arrived at her daughter's house. Her daughter welcomed her warmly. They talked, ate delicious food and spent a lovely time together.",
+fa:"سرانجام به خانه دخترش رسید. دختر با خوشحالی از او استقبال کرد. با هم صحبت کردند، غذای خوشمزه خوردند و لحظات خوبی داشتند.",
+cast:["woman","daughter"]
 },
 {
- kicker:"Page 5",
- title:"The Lion",
- paragraphs:[
-  "At last, a magnificent lion appeared on the road.",
-  "“Stop! I want to know who is inside!” he roared.",
-  "But the pumpkin kept rolling faster and faster."
- ],
- fa:"سرانجام شیری باشکوه در جاده ظاهر شد. غرش کرد: «بایست! می‌خواهم بدانم چه کسی داخل آن است!» اما کدو همچنان سریع‌تر و سریع‌تر می‌غلتید.",
- scene:"lion",
- caption:"The lion tries to stop the pumpkin",
- vocab:[["lion","شیر"],["magnificent","باشکوه"],["roar","غرش کردن"],["faster and faster","سریع‌تر و سریع‌تر"]],
- question:{
-  text:"🧠 What happens when the lion says “Stop!”?",
-  choices:["The pumpkin stops","The pumpkin rolls faster","The woman gets out","The lion goes home"],
-  correct:1
- }
+en:"When it was time to go home, the old woman was worried about the animals. Her daughter found a big, round pumpkin. She helped her mother get inside it!",
+fa:"وقتی وقت برگشتن رسید، پیرزن نگران حیوانات جنگل بود. دخترش یک کدو تنبل بزرگ و گرد پیدا کرد و به مادرش کمک کرد تا داخل آن پنهان شود!",
+cast:["woman","pumpkin"]
 },
 {
- kicker:"Page 6",
- title:"At Her Daughter’s House",
- paragraphs:[
-  "After escaping from the animals, the old woman finally reached her daughter’s house.",
-  "She climbed out of the pumpkin, and her daughter greeted her with a warm smile.",
-  "They went inside together and prepared a delicious meal."
- ],
- fa:"پس از فرار از حیوانات، پیرزن سرانجام به خانه دخترش رسید. از کدو بیرون آمد و دخترش با لبخندی گرم از او استقبال کرد. آن‌ها با هم به خانه رفتند و غذای خوشمزه‌ای آماده کردند.",
- scene:"reunion",
- caption:"A happy reunion",
- vocab:[["escape","فرار کردن"],["reach","رسیدن"],["greet","استقبال کردن"],["delicious","خوشمزه"]],
- question:{
-  text:"🧠 What do the woman and her daughter do?",
-  choices:["They run into the forest","They prepare a meal","They meet the wolf","They plant a pumpkin"],
-  correct:1
- }
+en:"The pumpkin began to roll down the path. It rolled past the leopard, the lion and the wolf. Each animal asked, “Have you seen an old woman?” The pumpkin rolled on and on!",
+fa:"کدو شروع کرد به غلتیدن در مسیر. از کنار پلنگ، شیر و گرگ گذشت. هر حیوان پرسید: «پیرزنی ندیدی؟» اما کدو همین‌طور غلتید و رفت!",
+cast:["pumpkin","wolf","lion"]
 },
 {
- type:"ending",
- kicker:"The End",
- title:"Well Done!",
- paragraphs:[
-  "Thanks to her clever idea, the old woman made it safely to her daughter’s house.",
-  "This story reminds us that courage and clever thinking can help us face difficult situations."
- ],
- fa:"به لطف فکر زیرکانه‌اش، پیرزن سالم به خانه دخترش رسید. این داستان به ما یادآوری می‌کند که شجاعت و فکر کردن هوشمندانه می‌توانند به ما کمک کنند با موقعیت‌های دشوار روبه‌رو شویم.",
- button:"🔄 Start Again"
+en:"At last, the pumpkin reached the old woman's home. She came out safely and happily. The clever old woman had escaped from all the hungry animals!",
+fa:"سرانجام کدو به خانه پیرزن رسید. پیرزن سالم و خوشحال از داخل کدو بیرون آمد. او با زیرکی از دست همه حیوانات گرسنه فرار کرده بود!",
+cast:["woman","pumpkin"]
 }
 ];
 
-let currentPage=0;
-let xp=0;
-let musicOn=false;
-let audioContext=null;
-let musicTimer=null;
-let musicIndex=0;
-const answered=new Set();
+/* SVG definitions */
+const defs=`
+<defs>
+ <linearGradient id="skin" x2="0" y2="1">
+  <stop stop-color="#ffe0b8"/><stop offset="1" stop-color="#d99b75"/>
+ </linearGradient>
+ <linearGradient id="cloth" x2="0" y2="1">
+  <stop stop-color="#c89bc8"/><stop offset="1" stop-color="#704879"/>
+ </linearGradient>
+ <linearGradient id="fur" x2="0" y2="1">
+  <stop stop-color="#c4c3b8"/><stop offset="1" stop-color="#777b7c"/>
+ </linearGradient>
+ <linearGradient id="pumpkin" x2="0" y2="1">
+  <stop stop-color="#ffd16b"/><stop offset=".55" stop-color="#f39a31"/><stop offset="1" stop-color="#bb541d"/>
+ </linearGradient>
+ <radialGradient id="sceneLight">
+  <stop stop-color="#f8dca1" stop-opacity=".38"/>
+  <stop offset="1" stop-color="#f8dca1" stop-opacity="0"/>
+ </radialGradient>
+ <filter id="shadow"><feGaussianBlur stdDeviation="3"/></filter>
+</defs>`;
 
-const $=id=>document.getElementById(id);
-const book=$("bookStage");
-
-function sceneHTML(type,caption){
- let people="";
- if(type==="house"){
-  people='<div class="character woman">👵</div><div class="character daughter">👧</div>';
- }else if(type==="pumpkin"){
-  people='<div class="character pumpkin">🎃</div>';
- }else if(type==="wolf"){
-  people='<div class="character wolf">🐺</div><div class="character pumpkin">🎃</div>';
- }else if(type==="leopard"){
-  people='<div class="character leopard">🐆</div><div class="character pumpkin">🎃</div>';
- }else if(type==="lion"){
-  people='<div class="character lion">🦁</div><div class="character pumpkin">🎃</div>';
- }else if(type==="reunion"){
-  people='<div class="character woman">👵</div><div class="character daughter">👧</div>';
- }
- const house=(type==="house"||type==="reunion")
-  ?'<div class="house"><div class="roof"></div><div class="door"></div><div class="window"></div></div>'
-  :'';
- return '<div class="scene-card" role="img" aria-label="'+caption+'">'+
- '<div class="cloud c1">☁️</div><div class="cloud c2">☁️</div>'+
- house+people+'<div class="scene-caption">'+caption+'</div></div>';
+function womanSVG(x=25,scale=1){
+return `<g transform="translate(${x} 30) scale(${scale})">
+<ellipse cx="65" cy="194" rx="45" ry="7" fill="#211820" opacity=".3" filter="url(#shadow)"/>
+<path d="M38 93 Q20 112 15 183 Q62 201 112 183 Q108 121 91 93Z" fill="url(#cloth)" stroke="#543958" stroke-width="2.5"/>
+<path d="M44 112 Q64 131 85 112 M31 153 Q63 164 98 153" fill="none" stroke="#e5c1db" stroke-width="2" opacity=".7"/>
+<path d="M35 111 Q16 129 12 151 M91 111 Q111 129 117 148" fill="none" stroke="#704879" stroke-width="13" stroke-linecap="round"/>
+<path d="M12 151 L9 160 M117 148 L122 156" stroke="url(#skin)" stroke-width="10" stroke-linecap="round"/>
+<rect x="53" y="78" width="23" height="25" rx="9" fill="url(#skin)"/>
+<path d="M29 52 Q28 9 65 8 Q103 10 101 54 L91 93 Q65 111 37 91Z" fill="#ddd0bc" stroke="#76645b" stroke-width="2.5"/>
+<path d="M29 53 Q5 70 19 112 Q29 126 39 99 L42 58Z" fill="#c7b8a7" stroke="#76645b" stroke-width="2"/>
+<path d="M32 39 Q44 2 80 18 Q94 25 100 49 Q72 32 47 49Z" fill="#f8eee0"/>
+<ellipse cx="65" cy="60" rx="29" ry="35" fill="url(#skin)" stroke="#9b6a57" stroke-width="1.5"/>
+<ellipse cx="46" cy="70" rx="7" ry="4" fill="#d98579" opacity=".35"/>
+<ellipse cx="84" cy="70" rx="7" ry="4" fill="#d98579" opacity=".35"/>
+<path d="M47 57 Q54 51 60 57 M71 57 Q78 51 84 57" fill="none" stroke="#68443a" stroke-width="2"/>
+<ellipse cx="54" cy="59" rx="2.8" ry="3.8" fill="#35272a"/>
+<ellipse cx="77" cy="59" rx="2.8" ry="3.8" fill="#35272a"/>
+<circle cx="55" cy="58" r="1" fill="white"/>
+<circle cx="78" cy="58" r="1" fill="white"/>
+<path d="M65 61 Q60 71 66 72" fill="none" stroke="#b77961" stroke-width="1.5"/>
+<path d="M57 80 Q65 86 74 79" fill="none" stroke="#a94f54" stroke-width="2" stroke-linecap="round"/>
+<path d="M34 34 Q62 15 92 36" fill="none" stroke="#c7a87c" stroke-width="2"/>
+<circle cx="65" cy="23" r="3" fill="#c7a87c"/>
+<path d="M34 181 L31 194 Q43 199 52 192 L50 183 M82 183 L82 193 Q95 199 104 192 L99 181" fill="#49323c"/>
+</g>`;
 }
 
-function vocabHTML(items){
- return '<div class="vocab">'+items.map(v=>
-  '<span><b>'+v[0]+'</b> = '+v[1]+'</span>'
- ).join("")+'</div>';
+function animalSVG(type,x=280,flip=true){
+let body="",head="";
+if(type==="wolf"){
+body=`<path d="M37 103 Q20 119 24 173 Q73 190 120 172 Q120 126 91 102Z" fill="url(#fur)" stroke="#51575a" stroke-width="3"/>`;
+head=`<path d="M36 52 L17 4 Q45 12 54 35 L91 34 Q105 12 132 5 L113 59 Q128 89 100 110 Q72 127 43 107 Q20 88 36 52Z" fill="#929a9c" stroke="#4e5659" stroke-width="3"/>
+<path d="M37 42 L29 15 L50 39 M110 40 L123 16 L101 40" fill="#d8a3a0"/>
+<path d="M47 82 Q74 104 105 82 Q100 116 75 119 Q52 111 47 82Z" fill="#e7d6c8"/>
+<path d="M66 87 L84 87 L75 98Z" fill="#25252a"/>
+<path d="M61 101 Q75 109 89 100" fill="none" stroke="#5b4141" stroke-width="2"/>
+<ellipse cx="53" cy="65" rx="4" ry="5" fill="#262329"/>
+<ellipse cx="98" cy="65" rx="4" ry="5" fill="#262329"/>
+<path d="M43 58 L61 55 M91 55 L108 58" stroke="#53565a" stroke-width="3"/>`;
+}
+if(type==="lion"){
+body=`<path d="M34 105 Q20 130 27 174 Q73 190 119 174 Q121 129 92 104Z" fill="#d7a653" stroke="#79502d" stroke-width="3"/>`;
+head=`<path d="M75 10 Q118 4 135 45 Q157 82 126 117 Q104 146 70 127 Q28 145 10 105 Q-8 68 19 31 Q40 7 75 10Z" fill="#a9662e" stroke="#633b25" stroke-width="4"/>
+<path d="M75 27 Q109 26 116 61 Q126 94 99 112 Q74 132 47 111 Q24 90 37 55 Q47 30 75 27Z" fill="#e2b66c" stroke="#8d572d" stroke-width="3"/>
+<path d="M43 58 Q57 47 67 59 M83 59 Q96 47 108 58" fill="none" stroke="#6d4629" stroke-width="3"/>
+<ellipse cx="56" cy="65" rx="4" ry="5" fill="#29201d"/>
+<ellipse cx="96" cy="65" rx="4" ry="5" fill="#29201d"/>
+<ellipse cx="76" cy="89" rx="27" ry="19" fill="#f4dfc3"/>
+<path d="M68 82 L84 82 L76 91Z" fill="#49302a"/>
+<path d="M76 92 Q65 106 55 97 M76 92 Q88 106 98 97" fill="none" stroke="#674334" stroke-width="2.5"/>`;
+}
+if(type==="leopard"){
+body=`<path d="M35 104 Q19 128 27 175 Q74 190 120 174 Q122 128 92 103Z" fill="#d6ae79" stroke="#74502e" stroke-width="3"/>`;
+head=`<path d="M34 44 Q13 8 48 18 L62 37 Q88 22 109 17 Q134 10 120 51 Q141 83 112 111 Q76 139 39 111 Q13 88 34 44Z" fill="#d8b47f" stroke="#78532e" stroke-width="3"/>
+<path d="M38 39 L31 21 L49 39 M108 39 L122 22 L115 43" fill="#9b6047"/>
+<path d="M45 78 Q75 98 104 78 Q99 112 75 116 Q51 110 45 78Z" fill="#f2ddc3"/>
+<path d="M67 81 L83 81 L75 90Z" fill="#4c3028"/>
+<ellipse cx="53" cy="63" rx="4" ry="5" fill="#29201d"/>
+<ellipse cx="97" cy="63" rx="4" ry="5" fill="#29201d"/>
+<path d="M42 53 Q53 45 64 53 M87 53 Q98 45 108 53" fill="none" stroke="#70492e" stroke-width="2.5"/>
+<g fill="#573c2b">
+<circle cx="43" cy="43" r="3"/><circle cx="61" cy="37" r="3"/>
+<circle cx="91" cy="37" r="3"/><circle cx="111" cy="47" r="3"/>
+<circle cx="34" cy="73" r="3"/><circle cx="48" cy="94" r="3"/>
+<circle cx="103" cy="94" r="3"/><circle cx="116" cy="73" r="3"/>
+</g>`;
+}
+return `<g transform="translate(${x} 28) scale(${flip?-1:1} 1)">
+<ellipse cx="75" cy="184" rx="53" ry="8" fill="#211820" opacity=".32" filter="url(#shadow)"/>
+${body}${head}
+<path d="M40 169 L33 194 M105 169 L112 194" stroke="#55433b" stroke-width="13" stroke-linecap="round"/>
+<path d="M27 194 Q40 199 49 193 M105 193 Q117 199 127 193" stroke="#342a2a" stroke-width="5" stroke-linecap="round"/>
+</g>`;
 }
 
-function questionHTML(q,index){
- if(!q)return "";
- return '<div class="question-box" data-question="'+index+'">'+
- '<div class="question">'+q.text+'</div><div class="answers">'+
- q.choices.map((choice,i)=>
- '<button type="button" class="answer" data-choice="'+i+'" aria-label="'+choice+'">'+choice+'</button>'
- ).join("")+'</div><div class="feedback" aria-live="polite"></div></div>';
+function daughterSVG(){
+return `<g transform="translate(30 30)">
+<ellipse cx="70" cy="190" rx="45" ry="7" fill="#211820" opacity=".3"/>
+<path d="M36 90 Q13 118 18 183 L120 183 Q122 119 91 90Z" fill="#668e83" stroke="#36594e" stroke-width="3"/>
+<path d="M45 105 L70 177 L91 105" fill="none" stroke="#b7d5bb" stroke-width="3"/>
+<rect x="58" y="77" width="24" height="23" rx="8" fill="url(#skin)"/>
+<path d="M34 50 Q30 12 71 10 Q111 12 105 57 L96 91 Q72 109 43 88Z" fill="#62483c"/>
+<ellipse cx="70" cy="59" rx="28" ry="34" fill="url(#skin)" stroke="#9b6a57" stroke-width="2"/>
+<path d="M42 49 Q48 15 78 23 Q100 25 100 49 Q78 35 47 55Z" fill="#533c35"/>
+<ellipse cx="59" cy="59" rx="3" ry="4" fill="#292329"/>
+<ellipse cx="81" cy="59" rx="3" ry="4" fill="#292329"/>
+<path d="M62 79 Q71 86 81 78" fill="none" stroke="#a94f54" stroke-width="2"/>
+<path d="M39 111 L12 145 M92 111 L122 145" stroke="#668e83" stroke-width="13" stroke-linecap="round"/>
+</g>`;
 }
 
+function pumpkinSVG(){
+return `<g transform="translate(145 42)">
+<ellipse cx="103" cy="164" rx="100" ry="12" fill="#211820" opacity=".3" filter="url(#shadow)"/>
+<path d="M100 36 Q104 1 136 8 Q128 28 108 45" fill="#527c43" stroke="#284b2d" stroke-width="4"/>
+<path d="M99 35 Q52 8 23 49 Q-8 94 21 139 Q46 173 100 164 Q154 176 182 139 Q212 94 178 49 Q150 8 99 35Z" fill="url(#pumpkin)" stroke="#a95a22" stroke-width="4"/>
+<path d="M99 35 Q65 43 67 96 Q66 145 100 164 Q130 143 133 96 Q133 45 99 35Z" fill="#ffbe5c" stroke="#d17a2c" stroke-width="3"/>
+<path d="M40 46 Q16 90 44 137 M159 45 Q187 91 155 139" fill="none" stroke="#d47b2b" stroke-width="5" opacity=".7"/>
+<path d="M42 78 L71 89 L57 99Z M128 89 L157 78 L142 99Z" fill="#58352b"/>
+<path d="M54 119 Q100 154 148 118 Q127 164 99 157 Q69 153 54 119Z" fill="#58352b"/>
+<path d="M63 125 Q100 145 137 124" fill="none" stroke="#f9d68e" stroke-width="3" opacity=".5"/>
+</g>`;
+}
+
+function treeSVG(x,y,s=1){
+return `<g transform="translate(${x} ${y}) scale(${s})">
+<path d="M48 64 L42 180 L78 180 L70 64Z" fill="#65432f"/>
+<path d="M56 104 L20 76 M65 94 L100 65" stroke="#65432f" stroke-width="9" stroke-linecap="round"/>
+<circle cx="58" cy="43" r="45" fill="#526f4c"/>
+<circle cx="23" cy="64" r="29" fill="#a66c3c"/>
+<circle cx="91" cy="62" r="31" fill="#b27b42"/>
+<circle cx="62" cy="15" r="27" fill="#788653"/>
+<circle cx="42" cy="40" r="4" fill="#d8a15c"/>
+<circle cx="82" cy="25" r="4" fill="#d8a15c"/>
+</g>`;
+}
+
+function backgroundSVG(){
+return `<g opacity=".95">
+${treeSVG(2,10,.85)}
+${treeSVG(395,0,.8)}
+<path d="M0 190 Q100 155 205 186 T500 183 L500 230 L0 230Z" fill="#6b593c"/>
+<path d="M0 206 Q140 181 260 208 T500 202" fill="none" stroke="#b18a55" stroke-width="4" opacity=".6"/>
+<circle cx="250" cy="65" r="100" fill="url(#sceneLight)"/>
+<g fill="#e6b16c" opacity=".9">
+<path d="M150 185 Q142 170 157 162 Q161 178 150 185Z"/>
+<path d="M360 202 Q350 187 365 180 Q371 195 360 202Z"/>
+<path d="M220 198 Q211 185 226 178 Q232 191 220 198Z"/>
+</g>
+</g>`;
+}
+
+function renderScene(){
+let svg=`<svg viewBox="0 0 500 230" xmlns="http://www.w3.org/2000/svg">${defs}${backgroundSVG()}`;
+const cast=pages[current].cast;
+if(cast.includes("woman"))svg+=womanSVG(25,.88);
+if(cast.includes("daughter"))svg+=daughterSVG();
+if(cast.includes("pumpkin"))svg+=pumpkinSVG();
+let animals=cast.filter(x=>["wolf","lion","leopard"].includes(x));
+animals.forEach((a,i)=>svg+=animalSVG(a,270+i*55,true));
+svg+=`</svg>`;
+document.getElementById("scene").innerHTML=svg;
+}
+
+let current=0,showTranslation=true;
 function render(){
- const p=pages[currentPage];
- let html="";
- if(p.type==="cover"){
-  html='<section class="page"><div class="cover">'+
-   '<div class="kicker">'+p.kicker+'</div>'+
-   '<div class="pumpkin-cover" aria-hidden="true">🎃</div>'+
-   '<h1>'+p.title+'</h1><p class="subtitle">'+p.subtitle+'</p>'+
-   '<button class="primary" id="startBtn" type="button">'+p.button+'</button>'+
-   '</div><div class="page-number">1</div></section>';
- }else if(p.type==="ending"){
-  html='<section class="page"><div class="ending">'+
-   '<div class="pumpkin-cover" aria-hidden="true">🎃🍂🌿</div>'+
-   '<div class="kicker">'+p.kicker+'</div><h1>'+p.title+'</h1>'+
-   p.paragraphs.map(t=>'<p class="story-text">'+t+'</p>').join("")+
-   '<div class="persian">'+p.fa+'</div>'+
-   '<button class="audio-btn" data-read="'+currentPage+'" type="button">🔊 Listen to the Ending</button>'+
-   '<div class="final-xp">⭐ Final XP: <span id="finalXP">'+xp+'</span></div>'+
-   '<button class="primary" id="restartBtn" type="button">'+p.button+'</button>'+
-   '</div><div class="page-number">'+(currentPage+1)+'</div></section>';
- }else{
-  html='<section class="page"><div class="kicker">'+p.kicker+'</div>'+
-   '<h2>'+p.title+'</h2>'+
-   p.paragraphs.map(t=>'<p class="story-text">'+t+'</p>').join("")+
-   '<button class="audio-btn" data-read="'+currentPage+'" type="button">🔊 Listen to the Story</button>'+
-   '<div class="persian">'+p.fa+'</div>'+
-   sceneHTML(p.scene,p.caption)+vocabHTML(p.vocab)+
-   questionHTML(p.question,currentPage)+
-   '<div class="page-number">'+(currentPage+1)+'</div></section>';
- }
- book.innerHTML=html;
- $("pageNow").textContent=currentPage+1;
- $("pageTotal").textContent=pages.length;
- $("xpValue").textContent=xp;
- $("prevBtn").disabled=currentPage===0;
- $("nextBtn").disabled=currentPage===pages.length-1;
-
- const start=$("startBtn");
- if(start)start.addEventListener("click",startStory);
- const restart=$("restartBtn");
- if(restart)restart.addEventListener("click",restartStory);
- book.querySelectorAll("[data-read]").forEach(btn=>{
-  btn.addEventListener("click",()=>speakPage(Number(btn.dataset.read)));
- });
- const q=book.querySelector(".question-box");
- if(q)setupQuestion(q,p.question,currentPage);
-}
-
-function setupQuestion(box,q,index){
- const feedback=box.querySelector(".feedback");
- const buttons=box.querySelectorAll(".answer");
- buttons.forEach(btn=>{
-  btn.addEventListener("click",()=>{
-   if(answered.has(index))return;
-   const selected=Number(btn.dataset.choice);
-   if(selected===q.correct){
-    answered.add(index);
-    xp+=10;
-    $("xpValue").textContent=xp;
-    const final=$("finalXP");
-    if(final)final.textContent=xp;
-    btn.classList.add("correct");
-    feedback.textContent="✨ Excellent! Correct answer. +10 XP";
-    feedback.style.color="#527b38";
-    buttons.forEach(b=>b.disabled=true);
-    playCorrect();
-    createFalling("🍂",14);
-    createFalling("🎃",5);
-    showXPPop();
-   }else{
-    btn.classList.add("wrong");
-    feedback.textContent="🌿 Not quite. Try again!";
-    feedback.style.color="#9b4d34";
-    playWrong();
-    btn.disabled=true;
-    setTimeout(()=>btn.classList.remove("wrong"),650);
-   }
-  });
- });
-}
-
-function startStory(){
- currentPage=1;
- render();
- createFalling("🍂",12);
- speakPage(1);
+let p=pages[current];
+document.getElementById("counter").textContent=`Scene ${current+1} / ${pages.length}`;
+document.getElementById("english").textContent=p.en;
+document.getElementById("persian").textContent=p.fa;
+document.getElementById("translation").classList.toggle("hidden",!showTranslation);
+renderScene();
 }
 function nextPage(){
- if(currentPage>=pages.length-1)return;
- stopReading();
- currentPage++;
- render();
+if(current<pages.length-1){current++;stopSpeech();render()}
 }
 function previousPage(){
- if(currentPage<=0)return;
- stopReading();
- currentPage--;
- render();
+if(current>0){current--;stopSpeech();render()}
 }
-function restartStory(){
- stopReading();
- stopMusic();
- currentPage=0;
- xp=0;
- answered.clear();
- render();
- window.scrollTo({top:0,behavior:"smooth"});
+function toggleTranslation(){
+showTranslation=!showTranslation;
+document.getElementById("translation").classList.toggle("hidden",!showTranslation);
+}
+function speakStory(){
+if(!("speechSynthesis" in window)){
+alert("Speech is not supported on this browser.");return;
+}
+stopSpeech();
+let utter=new SpeechSynthesisUtterance(pages[current].en);
+utter.lang="en-US";utter.rate=.88;
+speechSynthesis.speak(utter);
+}
+function stopSpeech(){
+if("speechSynthesis" in window)speechSynthesis.cancel();
 }
 
-$("nextBtn").addEventListener("click",nextPage);
-$("prevBtn").addEventListener("click",previousPage);
-$("readBtn").addEventListener("click",()=>{
- if(currentPage===0){
-  speak("Welcome to YOSRA. The Pumpkin Woman. Press Start the Story to begin.");
- }else speakPage(currentPage);
+const questions=[
+{q:"Who did the old woman want to visit?",o:["Her daughter","The wolf","The king"],a:0},
+{q:"Which animal did she meet first?",o:["Lion","Wolf","Leopard"],a:1},
+{q:"What did her daughter find?",o:["A basket","A big pumpkin","A carriage"],a:1},
+{q:"How did the old woman get home?",o:["By walking","By flying","Inside a rolling pumpkin"],a:2}
+];
+
+let qi=0,score=0,answered=false;
+function renderQuestion(){
+let q=questions[qi];
+document.getElementById("questionArea").innerHTML=
+`<h3 style="direction:ltr;text-align:left">${qi+1}. ${q.q}</h3>`+
+q.o.map((v,i)=>
+`<button class="quiz-option" onclick="answer(${i})">${String.fromCharCode(65+i)}. ${v}</button>`
+).join("");
+document.getElementById("feedback").textContent="";
+document.getElementById("score").textContent=`Score: ${score}`;
+answered=false;
+}
+function answer(i){
+if(answered)return;
+answered=true;
+let q=questions[qi];
+if(i===q.a){
+score+=10;
+document.getElementById("feedback").textContent="🎉 Excellent! Correct answer!";
+celebrate();
+playMelody();
+}else{
+document.getElementById("feedback").textContent="Not quite! The correct answer: "+q.o[q.a];
+}
+document.getElementById("score").textContent=`Score: ${score}`;
+setTimeout(()=>{
+qi++;
+if(qi<questions.length){
+renderQuestion();
+}else{
+document.getElementById("questionArea").innerHTML=
+`<h3 style="text-align:center">🏆 You finished the story!</h3>
+<p class="persian" style="text-align:center">آفرین! امتیاز نهایی شما: ${score}</p>
+<button class="primary" onclick="restartQuiz()">دوباره بازی کن</button>`;
+}
+},1300);
+}
+function restartQuiz(){
+qi=0;score=0;renderQuestion();
+}
+function celebrate(){
+for(let i=0;i<24;i++){
+let el=document.createElement("div");
+el.className="leaf";
+el.textContent=["🍂","🍁","🌰"][i%3];
+el.style.left=Math.random()*100+"vw";
+el.style.animationDelay=Math.random()*.8+"s";
+document.body.appendChild(el);
+setTimeout(()=>el.remove(),4500);
+}
+}
+function playMelody(){
+try{
+let ctx=new(window.AudioContext||window.webkitAudioContext)();
+[523,659,784,1046].forEach((f,i)=>{
+let o=ctx.createOscillator();
+let g=ctx.createGain();
+o.type="sine";
+o.frequency.value=f;
+g.gain.setValueAtTime(.0001,ctx.currentTime+i*.15);
+g.gain.exponentialRampToValueAtTime(.13,ctx.currentTime+i*.15+.03);
+g.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+i*.15+.25);
+o.connect(g);
+g.connect(ctx.destination);
+o.start(ctx.currentTime+i*.15);
+o.stop(ctx.currentTime+i*.15+.27);
 });
-
-function speakPage(index){
- const p=pages[index];
- if(!p)return;
- const text=[p.title,...(p.paragraphs||[]).map(t=>t.replace(/<[^>]*>/g,"")),p.caption||""].join(". ");
- speak(text);
+setTimeout(()=>ctx.close(),1300);
+}catch(e){}
 }
-function stopReading(){
- if("speechSynthesis" in window)window.speechSynthesis.cancel();
-}
-function speak(text){
- if(!("speechSynthesis" in window)){
-  alert("Speech reading is not supported by this browser.");
-  return;
- }
- window.speechSynthesis.cancel();
- const u=new SpeechSynthesisUtterance(text);
- u.lang="en-US";
- u.rate=.88;
- u.pitch=1;
- u.volume=1;
- const voices=window.speechSynthesis.getVoices();
- const voice=voices.find(v=>/^en-US$/i.test(v.lang))
-  ||voices.find(v=>/^en/i.test(v.lang));
- if(voice)u.voice=voice;
- window.speechSynthesis.speak(u);
-}
-if("speechSynthesis" in window){
- window.speechSynthesis.onvoiceschanged=()=>window.speechSynthesis.getVoices();
-}
-
-function getAudio(){
- const AudioCtx=window.AudioContext||window.webkitAudioContext;
- if(!AudioCtx)throw new Error("Audio unavailable");
- if(!audioContext)audioContext=new AudioCtx();
- if(audioContext.state==="suspended")audioContext.resume();
- return audioContext;
-}
-function tone(freq,duration,volume,type="sine",delay=0){
- const ctx=getAudio();
- const osc=ctx.createOscillator();
- const gain=ctx.createGain();
- const t=ctx.currentTime+delay;
- osc.type=type;
- osc.frequency.setValueAtTime(freq,t);
- gain.gain.setValueAtTime(.0001,t);
- gain.gain.exponentialRampToValueAtTime(volume,t+.02);
- gain.gain.exponentialRampToValueAtTime(.0001,t+duration);
- osc.connect(gain);
- gain.connect(ctx.destination);
- osc.start(t);
- osc.stop(t+duration+.03);
-}
-function safeTone(freq,duration,volume,type="sine",delay=0){
- try{tone(freq,duration,volume,type,delay)}catch(e){}
-}
-function playCorrect(){
- [523.25,659.25,783.99].forEach((f,i)=>safeTone(f,.25,.09,"sine",i*.09));
-}
-function playWrong(){safeTone(180,.22,.06,"triangle")}
-function playTurn(){safeTone(440,.12,.045,"sine")}
-
-const melody=[261.63,329.63,392,329.63,293.66,349.23,440,349.23];
-function musicNote(){
- if(!musicOn)return;
- safeTone(melody[musicIndex],.5,.018,"sine");
- musicIndex=(musicIndex+1)%melody.length;
-}
-function startMusic(){
- if(musicOn)return;
- musicOn=true;
- $("musicBtn").textContent="🔇 Music Off";
- musicNote();
- musicTimer=setInterval(musicNote,650);
-}
-function stopMusic(){
- musicOn=false;
- $("musicBtn").textContent="🎵 Music";
- if(musicTimer){clearInterval(musicTimer);musicTimer=null;}
-}
-$("musicBtn").addEventListener("click",()=>{
- if(musicOn)stopMusic();else startMusic();
-});
-
-function createFalling(symbol,count){
- const layer=$("effects");
- for(let i=0;i<count;i++){
-  const el=document.createElement("span");
-  el.className="fall";
-  el.textContent=symbol;
-  el.style.left=Math.random()*100+"%";
-  el.style.fontSize=(20+Math.random()*16)+"px";
-  el.style.setProperty("--drift",(Math.random()*180-90)+"px");
-  el.style.setProperty("--spin",(Math.random()*700-350)+"deg");
-  el.style.animationDuration=(3+Math.random()*2)+"s";
-  el.style.animationDelay=(Math.random()*.5)+"s";
-  layer.appendChild(el);
-  setTimeout(()=>el.remove(),6000);
- }
-}
-function showXPPop(){
- const pop=document.createElement("div");
- pop.className="xp-pop";
- pop.textContent="+10 XP";
- document.body.appendChild(pop);
- setTimeout(()=>pop.remove(),1000);
-}
-
-let touchX=0,touchY=0;
-book.addEventListener("touchstart",e=>{
- if(e.touches.length===1){
-  touchX=e.touches[0].clientX;
-  touchY=e.touches[0].clientY;
- }
-},{passive:true});
-book.addEventListener("touchend",e=>{
- if(!touchX)return;
- const dx=e.changedTouches[0].clientX-touchX;
- const dy=e.changedTouches[0].clientY-touchY;
- if(Math.abs(dx)>65&&Math.abs(dx)>Math.abs(dy)*1.3){
-  if(dx<0)nextPage();else previousPage();
- }
- touchX=0;touchY=0;
-},{passive:true});
-
-document.addEventListener("keydown",e=>{
- if(e.key==="ArrowRight"||e.key==="PageDown")nextPage();
- if(e.key==="ArrowLeft"||e.key==="PageUp")previousPage();
-});
-
-document.addEventListener("visibilitychange",()=>{
- if(document.hidden)stopReading();
-});
 
 render();
+renderQuestion();
 </script>
 </body>
 </html>
